@@ -34,7 +34,9 @@ const props = defineProps({
     <div class="countryBody">
         <div class="countryDisplay" id="countryDisplay">
             <a v-for="(item, index) in country" :key="index" href="#" class="countryItem">
-                <img :src="item.flags.svg" alt="Country Flag" />
+                <div class="countryImg">
+                   <img :src="item.flags.svg" alt="Country Flag" />
+                </div>   
                 <div class="countryText">
                     <h5><b>{{ item.name.common }} </b></h5>
                     <p><b>Population: </b>{{ item.population }}</p>
@@ -64,7 +66,10 @@ const props = defineProps({
     
 }
 
-
+.countryBody .countryDisplay .countryImg {
+   width: 100%;   
+}
+   
 main .countryBody .countryDisplay a{
     text-decoration: none;
     color:inherit;
