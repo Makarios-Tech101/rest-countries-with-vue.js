@@ -99,8 +99,11 @@ main .countryBody .countryDisplay a{
     margin: 0px;
 }
 
-
-
+.countryItem img[data-v-f42aea47] {
+    width: 100%;
+    height: 100%;
+ }
+   
 .countryText{
     margin-top: -5px;
 }
