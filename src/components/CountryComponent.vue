@@ -171,9 +171,9 @@ main .countryBody .countryDisplay a{
 }
 
 .countryItem img {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
+  width: 100%;
+  height: 100%;
+ 
 }
 
 .countryText {
