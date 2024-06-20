@@ -42,23 +42,17 @@
   
   <template>
     <div class="countryBody">
-      <div class="countryDisplay">
-        <a
-          v-for="(item, index) in countries"
-          :key="index"
-          href="#"
-          class="countryItem"
-          @click.prevent="selectCountry(item.cca3)"
-        >
-          <img :src="item.flags.svg" alt="Country Flag" />
-          <div class="countryText">
-            <h5><b>{{ item.name.common }}</b></h5>
-            <p><b>Population: </b>{{ item.population }}</p>
-            <p><b>Region: </b>{{ item.region }}</p>
-            <p><b>Capital: </b>{{ item.capital ? item.capital[0] : 'N/A' }}</p>
-          </div>
-        </a>
-      </div>
+        <div class="countryDisplay" id="countryDisplay">
+            <a v-for="(item, index) in country" :key="index" href="#" class="countryItem">
+                <img :src="item.flags.svg" alt="Country Flag" />
+                <div class="countryText">
+                    <h5><b>{{ item.name.common }} </b></h5>
+                    <p><b>Population: </b>{{ item.population }}</p>
+                    <p><b>Region: </b>{{ item.region }}</p>
+                    <p><b>Capital: </b>{{ item.capital ? item.capital[0] : 'N/A' }}</p>
+                </div>
+            </a>
+       </div>
     </div>
   </template>
   
@@ -81,7 +75,10 @@
     
 }
 
-
+.countryBody .countryDisplay .countryImg {
+   width: 100%;   
+}
+   
 main .countryBody .countryDisplay a{
     text-decoration: none;
     color:inherit;
@@ -111,8 +108,11 @@ main .countryBody .countryDisplay a{
     margin: 0px;
 }
 
-
-
+.countryItem img[data-v-f42aea47] {
+    width: 100%;
+    height: 100%;
+ }
+   
 .countryText{
     margin-top: -5px;
 }
@@ -179,6 +179,11 @@ main .countryBody .countryDisplay a{
   color: inherit;
 }
 
+.countryItem img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
 
 .countryText {
   display: flex;
