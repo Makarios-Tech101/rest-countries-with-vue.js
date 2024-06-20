@@ -1,50 +1,67 @@
-<!-- <script setup>
-import {ref} from 'vue';
-
-const country = ref([]);
-
-
-const getCountry =() => {
-   fetch('https://restcountries.com/v3.1/all') 
-    .then((res) => res.json())
-    .then((data) => {
-        country.value = data
-        console.log(data)
-    })
-
-    
-}
-
-getCountry();
-</script> -->
-
-
-<script setup>
-// import { defineProps } from 'vue';
-
-const props = defineProps({
-  country: {
-    type: Array,
-    required: true
-  }
-});
-</script>
-
-<template>
-    <div class="countryBody">
-        <div class="countryDisplay" id="countryDisplay">
-            <a v-for="(item, index) in country" :key="index" href="#" class="countryItem">
-                <img :src="item.flags.svg" alt="Country Flag" />
-                <div class="countryText">
-                    <h5><b>{{ item.name.common }} </b></h5>
-                    <p><b>Population: </b>{{ item.population }}</p>
-                    <p><b>Region: </b>{{ item.region }}</p>
-                    <p><b>Capital: </b>{{ item.capital ? item.capital[0] : 'N/A' }}</p>
-                </div>
-            </a>
-       </div>
+<!-- <template>
+    <div class="country" v-for="country in countries" :key="country.cca3" @click="selectCountry(country.cca3)">
+      <img :src="country.flags.svg" :alt="country.name.common + ' flag'" />
+      <div class="country-details">
+        <h2>{{ country.name.common }}</h2>
+        <p><strong>Population:</strong> {{ country.population }}</p>
+        <p><strong>Region:</strong> {{ country.region }}</p>
+        <p><strong>Capital:</strong> {{ country.capital?.[0] }}</p>
+      </div>
     </div>
-</template>
+  </template>
+  
+  <script setup>
+  const props = defineProps({
+    countries: Array
+  });
+  
+  const emit = defineEmits(['countryClick']);
+  
+  const selectCountry = (countryCode) => {
+    emit('countryClick', countryCode);
+  };
+  </script> -->
+  
+  
+  <script setup>
+  import { defineProps, defineEmits } from 'vue';
+  
+  const props = defineProps({
+    countries: {
+      type: Array,
+      required: true
+    }
+  });
+  
+  const emit = defineEmits(['countryClick']);
+  
+  const selectCountry = (countryCode) => {
+    emit('countryClick', countryCode);
+  };
+  </script>
+  
+  <template>
+    <div class="countryBody">
+      <div class="countryDisplay">
+        <a
+          v-for="(item, index) in countries"
+          :key="index"
+          href="#"
+          class="countryItem"
+          @click.prevent="selectCountry(item.cca3)"
+        >
+          <img :src="item.flags.svg" alt="Country Flag" />
+          <div class="countryText">
+            <h5><b>{{ item.name.common }}</b></h5>
+            <p><b>Population: </b>{{ item.population }}</p>
+            <p><b>Region: </b>{{ item.region }}</p>
+            <p><b>Capital: </b>{{ item.capital ? item.capital[0] : 'N/A' }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </template>
+  
 
 <style scoped>
 .countryBody {
@@ -104,7 +121,7 @@ main .countryBody .countryDisplay a{
 .countryText h5{
     margin: 0px;
     font-family: "Nunito Sans", sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     line-height: 50px;
 
@@ -113,7 +130,7 @@ main .countryBody .countryDisplay a{
 .countryText p{
     margin: 0px;
     font-family: "Nunito Sans", sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     line-height: 28px;
 
@@ -162,11 +179,6 @@ main .countryBody .countryDisplay a{
   color: inherit;
 }
 
-.countryItem img {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
-}
 
 .countryText {
   display: flex;

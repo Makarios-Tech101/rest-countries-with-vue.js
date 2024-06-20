@@ -1,38 +1,16 @@
-<!-- <script setup>
-import {ref} from 'vue';
-import CountryComponent from '../components/CountryComponent.vue'
-
-const countries = ref([]);
-
-
-const getCountries =() => {
-   fetch('https://restcountries.com/v3.1/all') 
-    .then((res) => res.json())
-    .then((data) => {
-        countries.value = data
-    })
-
-    
-}
-
-<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-
-getCountries();
-
-</script> -->
 
 <script setup>
-    import { ref, watch } from 'vue';
+    import { ref, watch, onMounted  } from 'vue';
     import CountryComponent from '../components/CountryComponent.vue';
-
+    import { useRouter } from 'vue-router';
+    
     const countryData = ref([]);
     const loading = ref(true);
-
-    
     const filteredCountries = ref([]);
     const selectedRegion = ref('');
     const searchQuery = ref('');
 
+    const router = useRouter();
 
     const getCountryData = () => {
     fetch('https://restcountries.com/v3.1/all')
@@ -49,18 +27,7 @@ getCountries();
           loading.value = false; // End loading
         });
     };
-    //     countryData.value = data;
-    //     console.log(data);
-    //     filteredCountries.value = data; 
-    //     searchedCountries.value = data;
-    //     loading.value = false;
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error fetching data:', error);
-    //         loading.value = false;
-    //     });
-    // };
-
+    
 
      // To filter by continent
         const filterCountries = () => {
@@ -76,7 +43,11 @@ getCountries();
           loading.value = false; // End loading after delay
         }, 2000); // 2-second delay
       };
+    
 
+      const viewCountryDetails = (countryCode) => {
+        router.push({ name: 'CountryDetail', params: { code: countryCode } });
+      };
 
     // Watch the searchQuery and filter countries based on the input
     watch(searchQuery, (newQuery) => {
@@ -93,14 +64,18 @@ getCountries();
       }, 2000); // 2-second delay
     });
 
+    watch(selectedRegion, () => {
+      filterCountries();
+    });
 
+    // onMounted(getCountryData);
 
  getCountryData();
 </script>
 
 <template>
  
-  <body class="">
+  <body>
   <!-- <div class="dark"> -->
     <header>
        <div class="heading">
@@ -110,11 +85,12 @@ getCountries();
              </h5>
           </div>
           <div class="headingButton">
-              <p class="theme">
+              <p class="theme" @click="toggleTheme">
                 <span><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 11.507a9.493 9.493 0 0 0 18 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.494 9.494 0 0 0 3 11.507"/>
                 </svg></span>
                Dark mode
+               
             </p>
           </div>
        </div>
@@ -148,8 +124,8 @@ getCountries();
               </div>
           </div>
           <div>
-             <!-- <CountryComponent :country="countryData" v-if="!loading" /> -->
-             <CountryComponent :country="filteredCountries" v-if="!loading" />
+            <CountryComponent :countries="filteredCountries" @countryClick="viewCountryDetails" v-if="!loading" />
+             <!-- <CountryComponent :country="filteredCountries" v-if="!loading" /> -->
              <!-- <div v-else>Loading...</div> -->
              <div class="loading" v-else><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
           </div>
@@ -196,15 +172,10 @@ body {
  
 }
 
-.dark {
-    --background-color: hsl(207, 26%, 17%);
-    --text-color: white;
-    --element-color: hsl(209, 23%, 22%);
-}
-
 header {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1); 
     background-color: var(--background-color);
+    margin:-6px;
 }
 
 
@@ -338,5 +309,24 @@ header .heading {
     border-radius:5px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 }
- /* */
+
+
+ /*RESPONSIVENESS */
+ @media(max-width: 699px ) {
+
+  header {
+    padding: 0px 20px;
+  }
+
+
+  .countryFilter  {
+    padding: 0px 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 20px;
+    margin: 50px 0px;
+    
+  }
+
+}
 </style>
