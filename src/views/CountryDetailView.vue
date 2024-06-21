@@ -124,13 +124,6 @@ body {
  
 }
 
-header {
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1); 
-    background-color: var(--background-color);
-    margin:-6px;
-}
-
-
 .lds-ring,
 .lds-ring div {
   box-sizing: border-box;
@@ -173,6 +166,8 @@ header {
   }
 }
 
+
+
 header {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1); 
     background-color: var(--background-color);
@@ -191,7 +186,7 @@ header .heading {
     
 }
 
-.headingText h2 {
+.headingText h5 {
     font-family: "Nunito Sans", sans-serif;
     font-weight: 700;
     font-style:normal;
