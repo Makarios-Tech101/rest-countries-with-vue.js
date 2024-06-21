@@ -46,8 +46,9 @@
     
 
       const viewCountryDetails = (countryCode) => {
-        router.push({ name: 'CountryDetail', params: { code: countryCode } });
+          router.push({ name: 'CountryDetail', params: { code: countryCode } });
       };
+            
 
     // Watch the searchQuery and filter countries based on the input
     watch(searchQuery, (newQuery) => {
@@ -124,16 +125,12 @@
               </div>
           </div>
           <div>
+            
             <CountryComponent :countries="filteredCountries" @countryClick="viewCountryDetails" v-if="!loading" />
              <!-- <CountryComponent :country="filteredCountries" v-if="!loading" /> -->
              <!-- <div v-else>Loading...</div> -->
              <div class="loading" v-else><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
           </div>
-          <!-- <div>
-            <p v-for="(item, index) in countries" :key="index">
-                {{ item.name.common }}
-            </p>
-          </div> -->
        </div>
     </main>
   <!-- </div>   -->
