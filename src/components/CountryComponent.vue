@@ -80,14 +80,12 @@ main .countryBody .countryDisplay a{
 
 .countryItem img[data-v-0391d4ea] {
     width: 100%;
-    height: auto;
-    margin: 0px;
 }
 
 .countryItem img[data-v-f42aea47] {
     width: 100%;
-    height: 100%;
- }
+}
+   
    
 .countryText{
     margin-top: -5px;
