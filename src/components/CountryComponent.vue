@@ -1,28 +1,4 @@
-<!-- <template>
-    <div class="country" v-for="country in countries" :key="country.cca3" @click="selectCountry(country.cca3)">
-      <img :src="country.flags.svg" :alt="country.name.common + ' flag'" />
-      <div class="country-details">
-        <h2>{{ country.name.common }}</h2>
-        <p><strong>Population:</strong> {{ country.population }}</p>
-        <p><strong>Region:</strong> {{ country.region }}</p>
-        <p><strong>Capital:</strong> {{ country.capital?.[0] }}</p>
-      </div>
-    </div>
-  </template>
-  
-  <script setup>
-  const props = defineProps({
-    countries: Array
-  });
-  
-  const emit = defineEmits(['countryClick']);
-  
-  const selectCountry = (countryCode) => {
-    emit('countryClick', countryCode);
-  };
-  </script> -->
-  
-  
+
   <script setup>
   import { defineProps, defineEmits } from 'vue';
   
@@ -35,15 +11,15 @@
   
   const emit = defineEmits(['countryClick']);
   
-  const selectCountry = (countryCode) => {
-    emit('countryClick', countryCode);
+  const handleCountryClick = (countryCode) => {
+  emit('countryClick', countryCode);
   };
   </script>
   
   <template>
     <div class="countryBody">
         <div class="countryDisplay" id="countryDisplay">
-            <a v-for="(item, index) in country" :key="index" href="#" class="countryItem">
+            <a v-for="(item, index) in countries" :key="index" href="#" class="countryItem" @click.prevent="handleCountryClick(item.cca3)">
                 <img :src="item.flags.svg" alt="Country Flag" />
                 <div class="countryText">
                     <h5><b>{{ item.name.common }} </b></h5>
