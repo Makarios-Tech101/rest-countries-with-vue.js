@@ -155,11 +155,6 @@ main .countryBody .countryDisplay a{
   color: inherit;
 }
 
-.countryItem img {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
-}
 
 .countryText {
   display: flex;
