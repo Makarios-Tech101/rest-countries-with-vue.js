@@ -85,7 +85,10 @@ main .countryBody .countryDisplay a{
 .countryItem img[data-v-f42aea47] {
     width: 100%;
 }
-   
+  
+img {
+    width: 100%;
+}  
    
 .countryText{
     margin-top: -5px;
